@@ -15,13 +15,19 @@
     <link rel="stylesheet" type="text/css" href="/estilos.css">
 </head>
 <body>
-
 	<div id="contenedor">
-		<input type="submit" class="encender" value="encender Led" />
-		<input type="submit" class="apagar" value="apagar Led" />
+	
+		<!--<img src="http://192.168.5.125:8080/video" loop autoplay> </img>
+		<img class="video_c" src="http://192.168.5.125:8080/video" ></img>
+		-->
+		<video class="video_c" src="/taylor.mp4" loop autoplay></video>
 
 		<input type="text" id="direction1" readonly>
 		<input type="text" id="direction2" readonly>
+		
+		<input type="submit" class="encender" value="encender Led" />
+		<input type="submit" class="apagar" value="apagar Led" />
+		
 			
 		<div id='controller1' class="joydiv-controller1">
 		    <div class="joydiv-up"></div>
@@ -53,31 +59,32 @@
 	<script charset="UTF-8" src="/joydiv.js"></script>
 
     <script type="text/javascript">
+        io = io.connect()
         var valor_camara = "Sin actividad";
         var valor_exomars = "Sin actividad";
 	    var element1 = document.getElementById('controller1');
 	    var element2 = document.getElementById('controller2');
         var joydiv1 = new JoydivModule.Joydiv( { 'element' : element1 } );
         var joydiv2 = new JoydivModule.Joydiv( { 'element' : element2 } );
-        
+       
         element1.addEventListener( 'joydiv-changed' , function( e ) {
             switch( joydiv1.getOneOf8Directions().name ){
             	case "up":
-            		valor_exomars = "exomars: arriba"; break;
+            		valor_exomars = "exomars: adelante"; break;
             	case "down":
-            		valor_exomars = "exomars: abajo"; break;
+            		valor_exomars = "exomars: atras"; break;
             	case "left":
             		valor_exomars = "exomars: izquierda"; break;
 				case "right":
             		valor_exomars = "exomars: derecha"; break;
             	case "up-left":
-            		valor_exomars = "exomars: arriba-izquierda"; break;
+            		valor_exomars = "exomars: adelante-izquierda"; break;
             	case "up-right":
-            		valor_exomars = "exomars: arriba-derecha"; break;
+            		valor_exomars = "exomars: adelante-derecha"; break;
             	case "down-left":
-            		valor_exomars = "exomars: abajo-izquierda"; break;
+            		valor_exomars = "exomars: atras-izquierda"; break;
             	case "down-right":
-            		valor_exomars = "exomars: abajo-derecha"; break;
+            		valor_exomars = "exomars: atras-derecha"; break;
             	case "none":
             		valor_exomars = "exomars: Sin movimiento"; break;
             }
@@ -87,9 +94,17 @@
         element2.addEventListener( 'joydiv-changed' , function( e ) {
             switch( joydiv2.getOneOf8Directions().name ){
             	case "up":
-            		valor_camara = "camara: arriba"; break;
+            		valor_camara = "camara: arriba"; 
+            		io.emit('encender', { hey: 'server' }, function(data) {
+					    console.log( data.success )
+					})
+            		break;
             	case "down":
-            		valor_camara = "camara: abajo"; break;
+            		valor_camara = "camara: abajo"; 
+					io.emit('apagar', { hey: 'server' }, function(data) {
+					    console.log( data.success )
+					})
+            		break;
             	case "left":
             		valor_camara = "camara: izquierda"; break;
 				case "right":
@@ -106,7 +121,6 @@
             		valor_camara = "camara: Sin movimiento"; break;
             }
             document.getElementById( 'direction2' ).value = valor_camara;
-
 
         });
     </script>

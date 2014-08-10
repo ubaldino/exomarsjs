@@ -89,6 +89,10 @@ app.get('/joydiv-skin-default.css', function(req, res) {
     res.sendfile(__dirname + '/css/joydiv-skin-default.css')
 })
 
+app.get('/taylor.mp4', function(req, res) { 
+    res.sendfile(__dirname + '/taylor.mp4')
+})
+
 
 
 

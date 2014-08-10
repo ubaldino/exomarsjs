@@ -1,6 +1,5 @@
 
 $(function() {
-	io = io.connect()
 
 	io.on( 'mensaje', function( msg ) {
 	    $("#pn_mensajes").html( msg.mensaje + "<br/>" )

@@ -89,52 +89,76 @@ td {
 a img {
   border: none;
 }
-#contenedor {
-  background: #11adb9;
-}
-#contenedor #direction1 {
+body .encender {
   position: absolute;
-  top: 5%;
+  top: 20%;
+}
+body .apagar {
+  position: absolute;
+  top: 30%;
+}
+body .video_c {
+  background: #000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+body #direction1 {
+  position: absolute;
+  top: 0%;
   left: 0;
 }
-#contenedor #direction2 {
+@media only screen and (max-width: 640px) {
+  body #direction1 {
+    top: 0%;
+    left: 0%;
+  }
+}
+body #direction2 {
   position: absolute;
-  top: 5%;
+  top: 0%;
   right: 0;
 }
-#contenedor .joydiv-controller1 {
-  position: absolute;
-  background: #009865;
-  width: 150px;
-  height: 150px;
-  font-size: 150px;
-  bottom: 35%;
-  left: 10%;
-}
 @media only screen and (max-width: 640px) {
-  #contenedor .joydiv-controller1 {
-    width: 100px;
-    height: 100px;
-    font-size: 100px;
-    bottom: 20%;
-    left: 10%;
+  body #direction2 {
+    top: 10%;
+    left: 0%;
   }
 }
-#contenedor .joydiv-controller1 .joydiv-up,
-#contenedor .joydiv-controller1 .joydiv-left,
-#contenedor .joydiv-controller1 .joydiv-right,
-#contenedor .joydiv-controller1 .joydiv-down,
-#contenedor .joydiv-controller1 .joydiv-n,
-#contenedor .joydiv-controller1 .joydiv-m {
+body .joydiv-controller1 {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  font-size: 110px;
+  bottom: 2%;
+  left: 1%;
+}
+@media only screen and (max-width: 640px) {
+  body .joydiv-controller1 {
+    width: 100px;
+    height: 100px;
+    font-size: 55px;
+    bottom: 4%;
+    left: 4%;
+  }
+}
+body .joydiv-controller1 .joydiv-up,
+body .joydiv-controller1 .joydiv-left,
+body .joydiv-controller1 .joydiv-right,
+body .joydiv-controller1 .joydiv-down,
+body .joydiv-controller1 .joydiv-n,
+body .joydiv-controller1 .joydiv-m {
   position: absolute;
   width: 0;
   height: 0;
   background: transparent;
   border: solid transparent;
 }
-#contenedor .joydiv-controller1 .joydiv-up {
-  top: -40%;
-  left: 50%;
+body .joydiv-controller1 .joydiv-up {
+  top: 0%;
+  left: 68%;
   margin-left: -40%;
   border-bottom-color: #f12f02;
   border-top-width: 0;
@@ -142,9 +166,9 @@ a img {
   border-right-width: 0.4em;
   border-bottom-width: 0.45em;
 }
-#contenedor .joydiv-controller1 .joydiv-left {
-  left: -40%;
-  top: 35%;
+body .joydiv-controller1 .joydiv-left {
+  left: 0%;
+  top: 53%;
   border-right-color: #f3b802;
   border-top-width: 0.4em;
   border-left-width: 0;
@@ -152,9 +176,9 @@ a img {
   border-bottom-width: 0.4em;
   margin-top: -25%;
 }
-#contenedor .joydiv-controller1 .joydiv-right {
-  right: -40%;
-  top: 50%;
+body .joydiv-controller1 .joydiv-right {
+  right: 0%;
+  top: 68%;
   margin-top: -40%;
   border-left-color: #f3b802;
   border-top-width: 0.4em;
@@ -162,9 +186,9 @@ a img {
   border-right-width: 0;
   border-bottom-width: 0.4em;
 }
-#contenedor .joydiv-controller1 .joydiv-down {
-  bottom: -40%;
-  left: 50%;
+body .joydiv-controller1 .joydiv-down {
+  bottom: 0%;
+  left: 68%;
   margin-left: -40%;
   border-top-color: #f12f02;
   border-top-width: 0.45em;
@@ -172,61 +196,70 @@ a img {
   border-right-width: 0.4em;
   border-bottom-width: 0;
 }
-#contenedor .joydiv-controller1 .joydiv-trackpad {
+body .joydiv-controller1 .joydiv-trackpad {
   position: absolute;
   left: 25%;
   right: 25%;
   top: 25%;
   bottom: 25%;
-  background: #01be46;
-  -webkit-border-radius: 10%;
-  border-radius: 10%;
+  background: #f9ce47;
+  -webkit-border-radius: 40%;
+  border-radius: 40%;
+  border-width: 0.04em;
+  border-style: solid;
+  border-color: #01be46;
 }
-#contenedor .joydiv-controller1 .joydiv-tracker {
+body .joydiv-controller1 .joydiv-trackpad .joydiv-tracker {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 51.5%;
+  left: 51.5%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
   border-style: solid;
-  border-width: 0.1em;
-  margin-left: -0.1em;
-  margin-top: -0.1em;
+  border-width: 0.17em;
+  margin-left: -0.17em;
+  margin-top: -0.17em;
   border-color: #0067c3;
 }
-#contenedor .joydiv-controller2 {
-  position: absolute;
-  background: #009865;
-  width: 150px;
-  height: 150px;
-  font-size: 150px;
-  bottom: 35%;
-  left: 70%;
-}
 @media only screen and (max-width: 640px) {
-  #contenedor .joydiv-controller2 {
-    width: 100px;
-    height: 100px;
-    font-size: 100px;
-    bottom: 20%;
-    left: 75%;
+  body .joydiv-controller1 .joydiv-trackpad .joydiv-tracker {
+    border-width: 0.27em;
+    margin-left: -0.27em;
+    margin-top: -0.27em;
   }
 }
-#contenedor .joydiv-controller2 .joydiv-up,
-#contenedor .joydiv-controller2 .joydiv-left,
-#contenedor .joydiv-controller2 .joydiv-right,
-#contenedor .joydiv-controller2 .joydiv-down,
-#contenedor .joydiv-controller2 .joydiv-n,
-#contenedor .joydiv-controller2 .joydiv-m {
+body .joydiv-controller2 {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  font-size: 110px;
+  bottom: 2%;
+  right: 1%;
+}
+@media only screen and (max-width: 640px) {
+  body .joydiv-controller2 {
+    width: 100px;
+    height: 100px;
+    font-size: 55px;
+    bottom: 4%;
+    right: 4%;
+  }
+}
+body .joydiv-controller2 .joydiv-up,
+body .joydiv-controller2 .joydiv-left,
+body .joydiv-controller2 .joydiv-right,
+body .joydiv-controller2 .joydiv-down,
+body .joydiv-controller2 .joydiv-n,
+body .joydiv-controller2 .joydiv-m {
   position: absolute;
   width: 0;
   height: 0;
   background: transparent;
   border: solid transparent;
 }
-#contenedor .joydiv-controller2 .joydiv-up {
-  top: -40%;
-  left: 50%;
+body .joydiv-controller2 .joydiv-up {
+  top: 0%;
+  left: 68%;
   margin-left: -40%;
   border-bottom-color: #f12f02;
   border-top-width: 0;
@@ -234,9 +267,9 @@ a img {
   border-right-width: 0.4em;
   border-bottom-width: 0.45em;
 }
-#contenedor .joydiv-controller2 .joydiv-left {
-  left: -40%;
-  top: 35%;
+body .joydiv-controller2 .joydiv-left {
+  left: 0%;
+  top: 53%;
   border-right-color: #f3b802;
   border-top-width: 0.4em;
   border-left-width: 0;
@@ -244,9 +277,9 @@ a img {
   border-bottom-width: 0.4em;
   margin-top: -25%;
 }
-#contenedor .joydiv-controller2 .joydiv-right {
-  right: -40%;
-  top: 50%;
+body .joydiv-controller2 .joydiv-right {
+  right: 0%;
+  top: 68%;
   margin-top: -40%;
   border-left-color: #f3b802;
   border-top-width: 0.4em;
@@ -254,9 +287,9 @@ a img {
   border-right-width: 0;
   border-bottom-width: 0.4em;
 }
-#contenedor .joydiv-controller2 .joydiv-down {
-  bottom: -40%;
-  left: 50%;
+body .joydiv-controller2 .joydiv-down {
+  bottom: 0%;
+  left: 68%;
   margin-left: -40%;
   border-top-color: #f12f02;
   border-top-width: 0.45em;
@@ -264,25 +297,35 @@ a img {
   border-right-width: 0.4em;
   border-bottom-width: 0;
 }
-#contenedor .joydiv-controller2 .joydiv-trackpad {
+body .joydiv-controller2 .joydiv-trackpad {
   position: absolute;
   left: 25%;
   right: 25%;
   top: 25%;
   bottom: 25%;
-  background: #01be46;
-  -webkit-border-radius: 10%;
-  border-radius: 10%;
+  background: #f9ce47;
+  -webkit-border-radius: 40%;
+  border-radius: 40%;
+  border-width: 0.04em;
+  border-style: solid;
+  border-color: #01be46;
 }
-#contenedor .joydiv-controller2 .joydiv-tracker {
+body .joydiv-controller2 .joydiv-trackpad .joydiv-tracker {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 51.5%;
+  left: 51%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
   border-style: solid;
-  border-width: 0.1em;
-  margin-left: -0.1em;
-  margin-top: -0.1em;
+  border-width: 0.17em;
+  margin-left: -0.17em;
+  margin-top: -0.17em;
   border-color: #0067c3;
+}
+@media only screen and (max-width: 640px) {
+  body .joydiv-controller2 .joydiv-trackpad .joydiv-tracker {
+    border-width: 0.27em;
+    margin-left: -0.27em;
+    margin-top: -0.27em;
+  }
 }
