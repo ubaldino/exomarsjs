@@ -3,7 +3,7 @@ $(function() {
 	io = io.connect()
 
 	io.on( 'mensaje', function( msg ) {
-	    $("#pn_mensajes").append( msg.mensaje + "<br/>" )
+	    $("#pn_mensajes").html( msg.mensaje + "<br/>" )
 	});
 
 	$('.encender').on( 'click', function() {

@@ -76,9 +76,21 @@ app.get('/jquery-2.0.3.min.js', function(req, res) {
 app.get('/control.js', function(req, res) { 
     res.sendfile(__dirname + '/js/control.js')
 })
+
+app.get('/joydiv.js', function(req, res) { 
+    res.sendfile(__dirname + '/js/joydiv.js')
+})
+
 app.get('/estilos.css', function(req, res) { 
     res.sendfile(__dirname + '/css/estilos.css')
 })
+
+app.get('/joydiv-skin-default.css', function(req, res) { 
+    res.sendfile(__dirname + '/css/joydiv-skin-default.css')
+})
+
+
+
 
 app.listen( 7076 )
 console.log("exomars en linea puerto: 7076")

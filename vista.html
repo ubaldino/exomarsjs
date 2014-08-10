@@ -2,21 +2,113 @@
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width" />
+	<!--<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">  -->
+    <meta name="format-detection" content="telephone=no" />
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <meta name="msapplication-tap-highlight" content="no" />
+
 	<title>Exomars.js</title>
-	<link rel="stylesheet" href="/estilos.css">
+
+    <!--<link rel="stylesheet" type="text/css" href="/joydiv-skin-default.css" />-->
+    <link rel="stylesheet" type="text/css" href="/estilos.css">
 </head>
 <body>
 
+	<div id="contenedor">
+		<input type="submit" class="encender" value="encender Led" />
+		<input type="submit" class="apagar" value="apagar Led" />
 
-	<input type="submit" class="encender" value="encender Led" />
-	<input type="submit" class="apagar" value="apagar Led" />
-	<input type="text" class="encender" placeholder="Ingrese petición..."/>
+		<input type="text" id="direction1" readonly>
+		<input type="text" id="direction2" readonly>
+			
+		<div id='controller1' class="joydiv-controller1">
+		    <div class="joydiv-up"></div>
+		    <div class="joydiv-left"></div>
+		    <div class="joydiv-right"></div>
+		    <div class="joydiv-down"></div>
+		    <div class="joydiv-trackpad">
+		        <div class="joydiv-tracker"></div>
+		    </div>
+		</div>
 
 
-	<div id="pn_mensajes" ></div>
+		<div id='controller2' class="joydiv-controller2">
+		    <div class="joydiv-up"></div>
+		    <div class="joydiv-left"></div>
+		    <div class="joydiv-right"></div>
+		    <div class="joydiv-down"></div>
+		    <div class="joydiv-trackpad">
+		        <div class="joydiv-tracker"></div>
+		    </div>
+		</div>
 
+		<div id="pn_mensajes" ></div>
+	</div>
+	
 	<script src="/jquery-2.0.3.min.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="/control.js"></script>
+	<script charset="UTF-8" src="/joydiv.js"></script>
+
+    <script type="text/javascript">
+        var valor_camara = "Sin actividad";
+        var valor_exomars = "Sin actividad";
+	    var element1 = document.getElementById('controller1');
+	    var element2 = document.getElementById('controller2');
+        var joydiv1 = new JoydivModule.Joydiv( { 'element' : element1 } );
+        var joydiv2 = new JoydivModule.Joydiv( { 'element' : element2 } );
+        
+        element1.addEventListener( 'joydiv-changed' , function( e ) {
+            switch( joydiv1.getOneOf8Directions().name ){
+            	case "up":
+            		valor_exomars = "exomars: arriba"; break;
+            	case "down":
+            		valor_exomars = "exomars: abajo"; break;
+            	case "left":
+            		valor_exomars = "exomars: izquierda"; break;
+				case "right":
+            		valor_exomars = "exomars: derecha"; break;
+            	case "up-left":
+            		valor_exomars = "exomars: arriba-izquierda"; break;
+            	case "up-right":
+            		valor_exomars = "exomars: arriba-derecha"; break;
+            	case "down-left":
+            		valor_exomars = "exomars: abajo-izquierda"; break;
+            	case "down-right":
+            		valor_exomars = "exomars: abajo-derecha"; break;
+            	case "none":
+            		valor_exomars = "exomars: Sin movimiento"; break;
+            }
+            document.getElementById( 'direction1' ).value = valor_exomars;
+        });
+
+        element2.addEventListener( 'joydiv-changed' , function( e ) {
+            switch( joydiv2.getOneOf8Directions().name ){
+            	case "up":
+            		valor_camara = "camara: arriba"; break;
+            	case "down":
+            		valor_camara = "camara: abajo"; break;
+            	case "left":
+            		valor_camara = "camara: izquierda"; break;
+				case "right":
+            		valor_camara = "camara: derecha"; break;
+            	case "up-left":
+            		valor_camara = "camara: arriba-izquierda"; break;
+            	case "up-right":
+            		valor_camara = "camara: arriba-derecha"; break;
+            	case "down-left":
+            		valor_camara = "camara: abajo-izquierda"; break;
+            	case "down-right":
+            		valor_camara = "camara: abajo-derecha"; break;
+            	case "none":
+            		valor_camara = "camara: Sin movimiento"; break;
+            }
+            document.getElementById( 'direction2' ).value = valor_camara;
+
+
+        });
+    </script>
 </body>
 </html>
