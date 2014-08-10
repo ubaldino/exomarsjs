@@ -54,7 +54,7 @@ app.io.route('encender', function(req) {
 })
 
 app.io.route('apagar', function(req) {
-    sp.write( "b" , function() {
+    p_serial.write( "b" , function() {
       console.log('...Led apagado..');
     });
 
@@ -68,12 +68,17 @@ app.io.route('apagar', function(req) {
 app.get('/', function(req, res) {
     res.sendfile(__dirname + '/vista.html')
 })
+
 app.get('/jquery-2.0.3.min.js', function(req, res) { 
-    res.sendfile(__dirname + '/jquery-2.0.3.min.js')
+    res.sendfile(__dirname + '/js/jquery-2.0.3.min.js')
 })
 
 app.get('/control.js', function(req, res) { 
-    res.sendfile(__dirname + '/control.js')
+    res.sendfile(__dirname + '/js/control.js')
 })
+app.get('/estilos.css', function(req, res) { 
+    res.sendfile(__dirname + '/css/estilos.css')
+})
+
 app.listen( 7076 )
 console.log("exomars en linea puerto: 7076")
