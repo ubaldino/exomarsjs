@@ -1,0 +1,23 @@
+
+{
+  "name": "Exomars.js",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "*",
+    "express": "*",
+    "express.io": "*",
+    "jade": "*",
+    "jeet": "*",
+    "rupture": "*",
+    "serialport": "*",
+    "socket.io": "*",
+    "axis-css": "*",
+    "nib": "*",
+    "autoprefixer-stylus": "*",
+    "coffee-script": "*",
+    "redis": "*",
+    "socket.io-redis": "*",
+    "marked": "*"
+  }
+}
