@@ -7,38 +7,37 @@ var puerto_serial  = require( "serialport" );
 
 /*
 var interval = setInterval( function(){ 
-  console.log("datos al cliente");
+    console.log("datos al cliente");
     app.io.broadcast( "mensaje", "mensaje del servidor"  );  
     //req.io.broadcast
-
 }, 500 );
 */
 
-var p_serial = new puerto_serial.SerialPort( 
-  "/dev/ttyUSB0" , 
-  {
-  	baudrate: 9600 ,
-  	parser: puerto_serial.parsers.readline('\r\n')
-  }
-);
+var p_serial = new puerto_serial.SerialPort(
+    "/dev/ttyUSB0" ,
+    {
+        baudrate: 9600 ,
+        parser: puerto_serial.parsers.readline('\r\n')
+    }
+);  
 
 p_serial.on( "close" , function (err) {
-  console.log("Puerto serial cerrado");
+    console.log("Puerto serial cerrado");
 });
 
 p_serial.on("error", function (err) {
-  console.error("error", err);
+    console.error("error", err);
 });
 
 p_serial.on("open", function () {
-  console.log("Puerto serial listo....");
+    console.log("Puerto serial listo....");
 });
 
 p_serial.on( "data" , function (data) {
-  console.log( data );
-  app.io.broadcast( 'mensaje' ,  {
-      mensaje: data
-  });
+    console.log( data );
+    app.io.broadcast( 'mensaje' ,  {
+        mensaje: data
+    });
 });
 
 //###########   rutas  ############
@@ -56,6 +55,7 @@ app.io.route('encender', function(req) {
 app.io.route('apagar', function(req) {
     p_serial.write( "b" , function() {
       console.log('...Led apagado..');
+      console.log( req.data.hey );
     });
 
     req.io.respond({
@@ -92,9 +92,6 @@ app.get('/joydiv-skin-default.css', function(req, res) {
 app.get('/taylor.mp4', function(req, res) { 
     res.sendfile(__dirname + '/taylor.mp4')
 })
-
-
-
 
 app.listen( 7076 )
 console.log("exomars en linea puerto: 7076")

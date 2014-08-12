@@ -8,4 +8,3 @@ void loop() {
 	Serial.println( "arduino" );
 	delay(1000 );
 }
-

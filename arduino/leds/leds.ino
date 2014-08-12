@@ -1,5 +1,6 @@
 
-void setup( ) {
+
+void setup() {
 	pinMode( 7 , 1 );
 	Serial.begin( 9600 );
 }
@@ -27,4 +28,3 @@ void loop( ) {
 	Serial.flush();
 
 }
-
