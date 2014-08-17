@@ -35,25 +35,42 @@ p_serial.on("open", function () {
 
 p_serial.on( "data" , function (data) {
     console.log( data );
+
     app.io.broadcast( 'mensaje' ,  {
         mensaje: data
     });
 });
 
 //###########   rutas  ############
-app.io.route('encender', function(req) {
-    p_serial.write( "a" , function() {
-      console.log('...Led prendido..');
+app.io.route('encender', function( req ) {
+    trama = req.data.comando+req.data.velocidad;
+    console.log( trama );
+
+    if ( req.data.comando == 's' ) {
+        var delay = 80 ;
+        p_serial.write( "s0");        
+        setTimeout( function(){
+            p_serial.write( "s0");        
+            console.log("stop seguro");        
+        },delay);
+        setTimeout( function(){
+            p_serial.write( "s0");        
+            console.log("stop seguro");        
+        },delay); 
+    };
+
+    p_serial.write( trama , function() {
+      console.log( trama );
     });
 
     req.io.respond({
-        success: 'Mesage enviado desde el servidor encendido'
+        success: trama
     })
 
 })
 
 app.io.route('apagar', function(req) {
-    p_serial.write( "b" , function() {
+    p_serial.write( "s0" , function() {
       console.log('...Led apagado..');
       console.log( req.data.hey );
     });
