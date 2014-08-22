@@ -12,183 +12,138 @@
 	<title>Exomars.js</title>
 
     <!--<link rel="stylesheet" type="text/css" href="/joydiv-skin-default.css" />-->
-    <link rel="stylesheet" type="text/css" href="/estilos.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/estilos.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+	<script src="/static/js/jquery-2.0.3.min.js"></script>
+		<script charset="UTF-8" src="/static/js/joydiv.js"></script>
+	<!--<script src="/static/js/libs/jquery-1.10.2.js"></script>-->
+	<script src="/static/js/libs/handlebars-1.1.2.js"></script>
+	<script src="/static/js/libs/ember-1.6.1.js"></script>
+	<script src="/static/js/app_ember.js"></script>
+
+	<script src="/static/js/headtrackr.min.js"></script>
+
 </head>
 <body>
 	<div id="contenedor">
+			<!--
+			<img id="video_c" class="video_c" src="http://192.168.1.192:8080/video" ></img>
+			-->
+
+		<script type="text/x-handlebars" data-template-name="index">
+			<video id="video_c" class="video_c" src="/taylor.mp4" controls loop></video>
+			<div id="panel_superior"></div>
+				
+			<!--<input type="text" id="direction1" readonly>
+			<input type="text" id="direction2" readonly>-->
 	
-		<!--<img src="http://192.168.5.125:8080/video" loop autoplay> </img>
-		<img class="video_c" src="http://192.168.5.125:8080/video" ></img>
-		-->
-		<video id="video_c" class="video_c" src="/taylor.mp4" controls loop></video>
-
-		<div id="panel_superior">
-			panel superior
-		</div>
+			<div id="panel_modo">
+				<ul>
+					<li name="control" class="btn" ><a  href="/#/">Control</a></li>
+					<li name="vision_artificial" class="btn"><a  href="/#/vision_artificial">Vision Artificial</a></li>
+				</ul>
+			</div>
 			
-		<input type="text" id="direction1" readonly>
-		<input type="text" id="direction2" readonly>
+				
+
+			<div id="panel_inferior"></div>
+			<div id='controller1' class="joydiv-controller1">
+			    <div id="adelante" class="joydiv-up"></div>
+			    <div id="izquierda" class="joydiv-left"></div>
+			    <div id="derecha" class="joydiv-right"></div>
+			    <div id="retroceder" class="joydiv-down"></div>
+			    <div class="joydiv-trackpad">
+			        <div class="joydiv-tracker"></div>
+			    </div>
+			</div>
+
+
+			<div id='controller2' class="joydiv-controller2">
+			    <div class="joydiv-up"></div>
+			    <div class="joydiv-left"></div>
+			    <div class="joydiv-right"></div>
+			    <div class="joydiv-down"></div>
+			    <div class="joydiv-trackpad">
+			        <div class="joydiv-tracker"></div>
+			    </div>
+			</div>
+
 		
-		<input type="submit" class="encender" value="encender Led" />
-		<input type="submit" class="apagar" value="apagar Led" />
+			<script charset="UTF-8" src="/static/js/eventos_mando.js"></script>
+		</script>
+
 		
+		<script type="text/x-handlebars" data-template-name="vision_artificial">
 			
-
-		<div id="panel_inferior">
-			<ul>
-				<li>asd</li>
-				<li>asd</li>
-				<li>sdfds</li>
-			</ul>
-		</div>
-		<div id='controller1' class="joydiv-controller1">
-		    <div id="adelante" class="joydiv-up"></div>
-		    <div id="izquierda" class="joydiv-left"></div>
-		    <div id="derecha" class="joydiv-right"></div>
-		    <div id="retroceder" class="joydiv-down"></div>
-		    <div class="joydiv-trackpad">
-		        <div class="joydiv-tracker"></div>
-		    </div>
-		</div>
+			<h1>Vision artifial</h1>
+			<div id="panel_modo">
+				<ul>
+					<li name="control" class="btn" ><a  href="/#/">Control</a></li>
+					<li name="vision_artificial" class="btn"><a  href="/#/vision_artificial">Vision Artificial</a></li>
+				</ul>
+			</div>
 
 
-		<div id='controller2' class="joydiv-controller2">
-		    <div class="joydiv-up"></div>
-		    <div class="joydiv-left"></div>
-		    <div class="joydiv-right"></div>
-		    <div class="joydiv-down"></div>
-		    <div class="joydiv-trackpad">
-		        <div class="joydiv-tracker"></div>
-		    </div>
-		</div>
+			<canvas id="inputCanvas" width="320" height="240" style="display:none"></canvas>
+			<video id="inputVideo" autoplay loop></video>
+			
+			<div id="log_camara"></div>
+			
+			<script type="text/javascript">
+
+				document.addEventListener('headtrackrStatus', 
+				  function (event) {
+				    if (event.status == "getUserMedia") {
+					    console.log( event.status );
+				      //alert("getUserMedia is supported!");
+				    }	
+				  }
+				);
+
+
+				document.addEventListener( 'headtrackingEvent' , function(event) {
+					console.log( "-----------------------" );
+					console.log( "X : "+ Math.round( event.x ) );
+					console.log( "Y : "+ Math.round( event.y ) );
+					console.log( "Z : "+ Math.round( event.z ) );
+					console.log( "-----------------------" );
+					var html = "X : "+ Math.round( event.x )+"\n";
+					    html += "Y : "+ Math.round( event.y )+"\n";
+					    html += "Z : "+ Math.round( event.z )+"\n";
+					document.getElementById("log_camara").innerHTML = html
+
+				}, false )
+
+
+
+				var videoInput = document.getElementById( 'inputVideo' );
+				var canvasInput = document.getElementById( 'inputCanvas' );
+
+				var htracker = new headtrackr.Tracker();
+				htracker.init( videoInput, canvasInput );
+				htracker.start();
+			</script>
+
+
+		</script>
+
+
+
+
+		<script type="text/x-handlebars" data-template-name="contacto">
+			<h1> La pagina de contacto! </h1>
+		</script>
+
+
 	</div>
-	
-	<script src="/jquery-2.0.3.min.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
-	<script src="/control.js"></script>
-	<script charset="UTF-8" src="/joydiv.js"></script>
-
+	<script charset="UTF-8" src="/static/js/control.js"></script>
+	
     <script type="text/javascript">
-        io = io.connect()
-        var valor_camara = "Sin actividad";
-        var valor_exomars = "Sin actividad";
-	    var element1 = document.getElementById('controller1');
-	    var element2 = document.getElementById('controller2');
-        var joydiv1 = new JoydivModule.Joydiv( { 'element' : element1 } );
-        var joydiv2 = new JoydivModule.Joydiv( { 'element' : element2 } );
-       	
-        /*
-        function colores_cursores( id_cursor ){
-        	var ids_cursores = [ "adelante" , "izquierda" , "derecha" , "retroceder"];
-        	
-        	for (var i = ids_cursores.length - 1 ; i >= 0 ; i-- ) {
-        		
-		        var cursor = document.querySelector( "#"+ids_cursores[i] );
-    			if ( dato == ids_cursores[i] )
-		            cursor.style.borderBottomColor = "#F12F02";
-		        else
-		            cursor.style.borderBottomColor = null;
-        	}
+    io = io.connect()
+    </script>	
+	
 
-        }
-        */
-
-        element1.addEventListener( 'joydiv-changed' , function( e ) {
-            switch( joydiv1.getOneOf8Directions().name ){
-            	case "up":
-            		//colores_cursores("adelante");
-					valor_exomars = "exomars: adelante";
-					io.emit('encender', { comando: 'a' , velocidad: '4'  }, function( data ) {
-					    console.log( data.success )
-					})
-					break;
-            	case "down":
-            		//colores_cursores("retroceder");
-					valor_exomars = "exomars: atras";
-					io.emit('encender', { comando: 'r' , velocidad: '4'  }, function( data ) {
-					    console.log( data.success )
-					})
-					break;
-            	case "left":
-					valor_exomars = "exomars: izquierda";
-					io.emit('encender', { comando: 'i' , velocidad: '4'  }, function( data ) {
-					    console.log( data.success )
-					})
-					break;
-				case "right":
-					valor_exomars = "exomars: derecha";
-					io.emit('encender', { comando: 'd' , velocidad: '4'  }, function( data ) {
-					    console.log( data.success )
-					})
-					break;
-
-
-            	case "up-left":
-					valor_exomars = "exomars: adelante-izquierda";
-					io.emit('encender', { comando: 'I' , velocidad: '4'  }, function( data ) {
-					    console.log( data.success )
-					})
-					break;
-            	case "up-right":
-					valor_exomars = "exomars: adelante-derecha";
-					io.emit('encender', { comando: 'D' , velocidad: '4'  }, function( data ) {
-					    console.log( data.success )
-					})
-					break;
-            	case "down-left":
-					valor_exomars = "exomars: atras-izquierda";
-					io.emit('encender', { comando: 'H' , velocidad: '4'  }, function( data ) {
-					    console.log( data.success )
-					})
-					break;
-            	case "down-right":
-					valor_exomars = "exomars: atras-derecha";
-					io.emit('encender', { comando: 'E' , velocidad: '4'  }, function( data ) {
-					    console.log( data.success )
-					})
-					break;
-            	case "none":
-					valor_exomars = "exomars: Sin movimiento";
-					io.emit('encender', { comando: 's' , velocidad: '0'  }, function( data ) {
-					    console.log( data.success )
-					})
-					break;
-            }
-            document.getElementById( 'direction1' ).value = valor_exomars;
-        });
-
-        element2.addEventListener( 'joydiv-changed' , function( e ) {
-            switch( joydiv2.getOneOf8Directions().name ){
-            	case "up":
-            		valor_camara = "camara: arriba"; 
-            		io.emit('encender', { clave: 'server' }, function(data) {
-					    console.log( data.success )
-					})
-            		break;
-            	case "down":
-            		valor_camara = "camara: abajo"; 
-					io.emit('apagar', { hey: 'server' } , function(data) {
-					    console.log( data.success )
-					})
-            		break;
-            	case "left":
-            		valor_camara = "camara: izquierda"; break;
-				case "right":
-            		valor_camara = "camara: derecha"; break;
-            	case "up-left":
-            		valor_camara = "camara: arriba-izquierda"; break;
-            	case "up-right":
-            		valor_camara = "camara: arriba-derecha"; break;
-            	case "down-left":
-            		valor_camara = "camara: abajo-izquierda"; break;
-            	case "down-right":
-            		valor_camara = "camara: abajo-derecha"; break;
-            	case "none":
-            		valor_camara = "camara: Sin movimiento"; break;
-            }
-            document.getElementById( 'direction2' ).value = valor_camara;
-
-        });
-    </script>
 </body>
 </html>

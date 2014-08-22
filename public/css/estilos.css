@@ -89,42 +89,35 @@ td {
 a img {
   border: none;
 }
-body #panel_superior {
-  position: absolute;
-  background: #f00;
-  padding: 10px 20px;
-  top: 0;
-  left: 0;
-  right: 0;
+a {
+  text-decoration: none;
 }
-body #panel_inferior {
-  position: absolute;
-  padding: 0px 0px;
-  bottom: 0;
-  left: 0;
-  right: 0;
+.btn {
+  padding: 8px 8px;
+  margin: 0;
 }
-body #panel_inferior ul li {
-  font-weight: bold;
-  color: #000;
-  float: left;
+body #panel_modo {
+  position: absolute;
+  top: 20%;
+  line-height: 2em;
+  right: 0;
+  margin: 0;
+  padding: 10px;
   display: inline-block;
-  background: #f00;
-  padding: 10px 30px;
-  border: 0px;
 }
-body .encender {
-  position: absolute;
-  padding: 15px 1px;
+body #panel_modo ul li[name="control"] {
+  background: #f9ce47;
+}
+body #panel_modo ul li[name="control"] a {
+  text-align: justify;
+  padding: 12% 26%;
+}
+body #panel_modo ul li[name="vision_artificial"] {
   background: #009865;
-  border-width: 0;
-  top: 9%;
 }
-body .apagar {
-  position: absolute;
-  padding: 15px 1px;
-  border-width: 0;
-  top: 22%;
+body #panel_modo ul li[name="vision_artificial"] a {
+  text-align: justify;
+  padding: 12% 0%;
 }
 body .video_c {
   background: #000;

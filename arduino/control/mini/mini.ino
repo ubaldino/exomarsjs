@@ -9,12 +9,10 @@
 #define M5 6
 #define M6 7
 
-#define M7 2
-#define M8 3
-
-#define M9 14
-#define M10 15
-
+#define MIC 8 //M7
+#define IR  9 //M8
+#define CAM_ID 10 //M9
+#define CAM_AB 11 //M10
 
 #define ANG_M1 87
 #define ANG_M2 86
@@ -24,8 +22,10 @@
 #define ANG_M5 86
 #define ANG_M6 85
 
-#define ANG_M7 120
-#define ANG_M8 90
+#define ANG_CAM_ID 120
+#define ANG_CAM_AB 100
+#define ANG_MIC 90
+#define ANG_IR 60
 
 #define LI 0
 #define LS 180
@@ -37,7 +37,6 @@
 #define IR_LEFT '\xf2'
 #define MIC_UP '\xf3'
 #define MIC_DOWN '\xf4'
-#define CAM1_RIGHT_FWD '\xf5'
 #define CAM1_LEFT_BWD '\xf6'
 #define CAM1_LEFT '\xf7' 
 #define CAM1_RIGHT '\xf8'
@@ -56,10 +55,20 @@
 #define DERECHA_ADELANTE    68 // D
 #define DERECHA_RETROCEDER  69 // E
 
+#define CAMARA_ARRIBA 74 //J
+#define CAMARA_ABAJO  75 //K
+#define CAMARA_IZQ    76 //L
+#define CAMARA_DER    77 //M
+#define MIC_ARRIBA    79 //N
+#define MIC_ABAJO     78 //O
+#define CAMARA_IZQ_C  80 //P
+#define CAMARA_DER_C  81 //Q
+#define IR_IZQ        82 //R
+#define IR_DER        83 //S
 
 Servo motor1 , motor2 , motor3 ;
 Servo motor4 , motor5 , motor6 ;
-Servo cam1 , cam2 , mic , ir ;
+Servo camid , camab , mic , ir ;
 byte cmd;
 int ir_sensor = A0;
 byte trama_motores[] = { 0 , 0 } ;
@@ -81,6 +90,9 @@ void setup(){
   */
   Serial.begin(9600);
   delay( 500 );
+  inicializar();
+  delay(500);
+  killear();
 }
 
 void loop(){
@@ -115,8 +127,69 @@ void loop(){
                 break;
             case DERECHA_RETROCEDER :
                 derecha_retroceder( valor );
+                break;    
+            case CAMARA_ARRIBA :
+                camab.attach(CAM_AB);
+                camab_up();
+                delay(500);
+                camab.detach();
                 break;
+            case CAMARA_ABAJO :
+                camab.attach(CAM_AB);
+                camab_down();
+                delay(500);
+                camab.detach();
+                break;
+            case CAMARA_DER :
+                camid.attach(CAM_ID);
+                camid_der();
+                delay(500);
+                camid.detach();
+                break;
+            case CAMARA_IZQ :
+                camid.attach(CAM_ID);
+                camid_izq();
+                delay(500);
+                camid.detach();
+                break;
+            case MIC_ABAJO :
+                mic.attach(MIC);
+                mic_down();
+                delay(500);
+                mic.detach();
+                break;    
+            case MIC_ARRIBA :
+                mic.attach(MIC);
+                mic_up();
+                delay(500);
+                mic.detach();
+                break;
+            case CAMARA_IZQ_C :
+                camid.attach(CAM_ID);
+                camid_izq_bwd();
+                delay(500);
+                camid.detach();
+                break;
+            case CAMARA_DER_C :
+                camid.attach(CAM_ID);
+                camid_der_fwd();
+                delay(500);
+                camid.detach();
+                break;
+            case IR_IZQ :
+                ir.attach(IR);
+                ir_izq();
+                delay(500);
+                ir.detach();
+                break;
+            case IR_DER :
+                ir.attach(IR);
+                ir_der();
+                delay(500);
+                ir.detach();
+                break;        
         }
+        delay(10);
     }
     Serial.flush();
 }
@@ -296,5 +369,131 @@ void atachar(){
   motor6.attach( M6 ) ;
     
 }
+
+void camid_izq(){
+  int ang = camid.read() - 10;
+  if(ang < LS && ang > LI){
+    camid.write(ang);
+  }
+  delay(100);
+}
+
+void camid_izq_bwd(){
+  int nro = 0;
+  Serial.println(camid.read());
+  int ang = camid.read() - 35;
+  if(ang < LS && ang > LI){
+    while(nro < 7){
+      camid.write(camid.read()-5);
+      delay(70);
+      nro = nro + 1;
+    }
+  }
+  Serial.println(camid.read());
+}
+
+void camid_der_fwd(){
+  int nro = 0;
+  Serial.println(camid.read());
+  int ang = camid.read() + 35;
+  if(ang < LS && ang > LI){
+    while(nro < 7){
+      camid.write(camid.read()+5);
+      delay(70);
+      nro = nro + 1;
+    }
+  }
+  Serial.println(camid.read());
+}
+
+void camid_der(){
+  int ang = camid.read() + 10;
+  if(ang < LS && ang > LI){
+    camid.write(ang);
+  }
+  delay(100);
+}
+
+void camab_up(){
+  int ang = camab.read() + 10;
+  if(ang < LS && ang > LI){
+    camab.write(ang);
+  }
+  delay(1000);
+}
+
+void camab_down(){
+  int ang = camab.read() - 10;
+  if(ang < LS && ang > LI){
+    camab.write(ang);
+  }
+  delay(1000);
+}
+
+void mic_up(){/*
+  Serial.println(Serial.read());
+  if(mic.read() >= 90){
+    for(int i = 110; i > 90; i--){
+      mic.write(mic.read()-5);
+      delay(70);
+    }
+  }
+  Serial.println(mic.read());*/
+  
+  mic.write(90);
+ 
+}
+
+void mic_down(){/*
+  Serial.println(Serial.read());
+  for(int i = 90; i < 105; i++){
+    mic.write(mic.read() + 5);
+    delay(70);
+  }
+  Serial.println(mic.read());*/
+  
+  mic.write(30);
+ 
+}
+
+void inicializar(){
+  camab.attach(CAM_AB);
+  camid.attach(CAM_ID);
+  mic.attach(MIC);
+  ir.attach(IR);
+  camab.write(ANG_CAM_AB);
+  camid.write(ANG_CAM_ID);
+  mic.write(ANG_MIC);
+  ir.write(ANG_IR);
+}
+
+void killear(){
+  camab.detach();
+  camid.detach();
+  mic.detach();
+  ir.detach();
+}
+
+void ir_der(){
+  Serial.println(ir.read());
+  if(ir.read() == 60){
+    ir.write(0);
+  }else{
+    ir.write(60);
+  }
+  Serial.println(ir.read());
+}
+
+void ir_izq(){
+  Serial.println(ir.read());
+  if(ir.read() == 60){
+    ir.write(120);
+  }else{
+    ir.write(60);
+  }
+  Serial.println(ir.read());
+}
+
+
 
 

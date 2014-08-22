@@ -5,7 +5,10 @@
   "private": true,
   "dependencies": {
     "express": "*",
-    "express": "*",
+    "ms": "*",
+    "mime": "*",
+    "finished": "*",
+    "ms": "*",
     "express.io": "*",
     "jade": "*",
     "jeet": "*",
@@ -19,6 +22,7 @@
     "redis": "*",
     "socket.io-redis": "*",
     "marked": "*",
+    "forever": "*",
     "colors": "*"
   }
 }
