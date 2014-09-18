@@ -11,10 +11,34 @@ var passport         = require('passport')
   , session          = require('express-session')
   , bodyParser       = require("body-parser")
   , cookieParser     = require("cookie-parser")
+  , expressLayouts = require('express-ejs-layouts')
   , methodOverride   = require('method-override');
 
 var FACEBOOK_APP_ID = "292025954335781"
 var FACEBOOK_APP_SECRET = "fb7a36d022187c96e065f5a9ecaacaa1";
+
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+  done( null , obj );
+});
+
+
+passport.use(new FacebookStrategy({
+    clientID: FACEBOOK_APP_ID,
+    clientSecret: FACEBOOK_APP_SECRET,
+    callbackURL: "http://localhost:7076/auth/facebook/callback",
+    profileFields: ['id', 'displayName', 'photos']
+  },
+  function(accessToken, refreshToken, profile, done) {
+    process.nextTick(function () {
+      return done(null, profile);
+    });
+  }
+));
 
 
 // ###########  conección usb_serial
@@ -104,7 +128,9 @@ app.io.route('apagar', function(req) {
 app.use( '/static', express.static(__dirname + '/public') );
 
 app.set( 'views', __dirname + '/vistas');
+app.use( expressLayouts )
 app.set( 'view engine', 'ejs');
+
 app.use( logger() );
 app.use( cookieParser() );
 app.use( bodyParser() );
@@ -117,17 +143,53 @@ app.use( passport.session() );
 
 
 
-
 //##########   Peticiones  urls ################
-app.get('/', function(req, res) {
-    res.sendfile(__dirname + '/face.html')
-})
+app.get( '/' , filtroAuth , function( req , res ){
+    console.log("----------------")
+    console.log( req.user.photos[0].value )
+    console.log("----------------")
+    res.render( 'index' , { user : req.user } );
+});
 
+app.get( '/login' , function( req , res ){
+  res.render( 'login' , { user : req.user } );
+});
 
 app.get('/taylor.mp4', function(req, res) { 
     res.sendfile(__dirname + '/taylor.mp4')
 })
 
+
+
+app.get('/auth/facebook',
+  passport.authenticate('facebook', { scope: ['email', 'public_profile' , 'user_friends'] } ),
+  function(req, res){
+    // The request will be redirected to Facebook for authentication, so this
+    // function will not be called.
+  });
+
+app.get('/auth/facebook/callback', 
+    passport.authenticate('facebook', { failureRedirect: '/login' }),
+    function(req, res) {
+        res.redirect('/');
+});
+
+
+
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/' );
+});
+
+
 app.listen( 7076 )
 
 console.log("exomars en linea puerto: 7076")
+
+
+
+function filtroAuth( req , res , next ) {
+    if ( req.isAuthenticated() )
+        return next(); 
+    res.redirect('/login')
+}

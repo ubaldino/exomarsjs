@@ -1,8 +1,8 @@
 App = Ember.Application.create();
 
 App.Router.map( function() {
-    this.route( "control" );
     this.route( "vision_artificial" );
+    this.route( "tripulante" );
 });
 
 /*

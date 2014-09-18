@@ -39,6 +39,8 @@
     "body-parser":"*",
     "cookie-parser":"*",
     "method-override":"*",
+    "ejs":"*",
+    "express-ejs-layouts":"*",
     "colors": "*"
   }
 }

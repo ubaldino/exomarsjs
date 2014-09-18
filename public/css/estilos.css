@@ -116,7 +116,53 @@ a {
   padding: 12px;
   background: #fff;
 }
-body #panel_modo {
+body #panel_superior {
+  position: absolute;
+  padding: 10px 20px;
+  top: 0;
+  left: 0;
+}
+body #panel_superior img {
+  width: 7em;
+}
+body #login a {
+  color: #000;
+  background: #0067c3;
+  padding: 0.25em;
+  -webkit-border-radius: 0.2em;
+  border-radius: 0.2em;
+}
+/*
+	#panel_inferior
+		position absolute
+		padding 0px 0px
+		bottom 0
+		left 0
+		right 0
+		ul
+			li
+				font-weight bold
+				color black
+				float left
+				display inline-block
+				background red
+				padding 10px 30px
+				border 0px
+				
+
+	.encender
+		position absolute
+		padding 15px 1px
+		background $color3
+		border-width 0
+		top 9%
+	.apagar
+		position absolute
+		padding 15px 1px
+		border-width 0	
+		top 22%
+*/
+#panel_modo {
   position: absolute;
   top: 20%;
   line-height: 2em;
@@ -125,21 +171,21 @@ body #panel_modo {
   padding: 10px;
   display: inline-block;
 }
-body #panel_modo ul li[name="control"] {
+#panel_modo ul li[name="control"] {
   background: #f9ce47;
 }
-body #panel_modo ul li[name="control"] a {
+#panel_modo ul li[name="control"] a {
   text-align: justify;
   padding: 12% 26%;
 }
-body #panel_modo ul li[name="vision_artificial"] {
+#panel_modo ul li[name="vision_artificial"] {
   background: #009865;
 }
-body #panel_modo ul li[name="vision_artificial"] a {
+#panel_modo ul li[name="vision_artificial"] a {
   text-align: justify;
   padding: 12% 0%;
 }
-body .video_c {
+.video_c {
   background: #000;
   position: absolute;
   top: 0;
@@ -147,31 +193,31 @@ body .video_c {
   width: 100%;
   height: 100%;
 }
-body #direction1 {
+#direction1 {
   border-width: 0;
   position: absolute;
   top: 0%;
   left: 0;
 }
 @media only screen and (max-width: 640px) {
-  body #direction1 {
+  #direction1 {
     top: 0%;
     left: 0%;
   }
 }
-body #direction2 {
+#direction2 {
   border-width: 0;
   position: absolute;
   top: 0%;
   right: 0;
 }
 @media only screen and (max-width: 640px) {
-  body #direction2 {
+  #direction2 {
     top: 10%;
     left: 0%;
   }
 }
-body .joydiv-controller1 {
+.joydiv-controller1 {
   position: absolute;
   width: 200px;
   height: 200px;
@@ -180,7 +226,7 @@ body .joydiv-controller1 {
   left: 1%;
 }
 @media only screen and (max-width: 640px) {
-  body .joydiv-controller1 {
+  .joydiv-controller1 {
     width: 100px;
     height: 100px;
     font-size: 55px;
@@ -188,19 +234,19 @@ body .joydiv-controller1 {
     left: 4%;
   }
 }
-body .joydiv-controller1 .joydiv-up,
-body .joydiv-controller1 .joydiv-left,
-body .joydiv-controller1 .joydiv-right,
-body .joydiv-controller1 .joydiv-down,
-body .joydiv-controller1 .joydiv-n,
-body .joydiv-controller1 .joydiv-m {
+.joydiv-controller1 .joydiv-up,
+.joydiv-controller1 .joydiv-left,
+.joydiv-controller1 .joydiv-right,
+.joydiv-controller1 .joydiv-down,
+.joydiv-controller1 .joydiv-n,
+.joydiv-controller1 .joydiv-m {
   position: absolute;
   width: 0;
   height: 0;
   background: transparent;
   border: solid transparent;
 }
-body .joydiv-controller1 .joydiv-up {
+.joydiv-controller1 .joydiv-up {
   top: 0%;
   left: 68%;
   margin-left: -40%;
@@ -210,7 +256,7 @@ body .joydiv-controller1 .joydiv-up {
   border-right-width: 0.4em;
   border-bottom-width: 0.45em;
 }
-body .joydiv-controller1 .joydiv-left {
+.joydiv-controller1 .joydiv-left {
   left: 0%;
   top: 53%;
   border-right-color: #f3b802;
@@ -220,7 +266,7 @@ body .joydiv-controller1 .joydiv-left {
   border-bottom-width: 0.4em;
   margin-top: -25%;
 }
-body .joydiv-controller1 .joydiv-right {
+.joydiv-controller1 .joydiv-right {
   right: 0%;
   top: 68%;
   margin-top: -40%;
@@ -230,7 +276,7 @@ body .joydiv-controller1 .joydiv-right {
   border-right-width: 0;
   border-bottom-width: 0.4em;
 }
-body .joydiv-controller1 .joydiv-down {
+.joydiv-controller1 .joydiv-down {
   bottom: 0%;
   left: 68%;
   margin-left: -40%;
@@ -240,7 +286,7 @@ body .joydiv-controller1 .joydiv-down {
   border-right-width: 0.4em;
   border-bottom-width: 0;
 }
-body .joydiv-controller1 .joydiv-trackpad {
+.joydiv-controller1 .joydiv-trackpad {
   position: absolute;
   left: 25%;
   right: 25%;
@@ -253,7 +299,7 @@ body .joydiv-controller1 .joydiv-trackpad {
   border-style: solid;
   border-color: #01be46;
 }
-body .joydiv-controller1 .joydiv-trackpad .joydiv-tracker {
+.joydiv-controller1 .joydiv-trackpad .joydiv-tracker {
   position: absolute;
   top: 51.5%;
   left: 51.5%;
@@ -266,13 +312,13 @@ body .joydiv-controller1 .joydiv-trackpad .joydiv-tracker {
   border-color: #0067c3;
 }
 @media only screen and (max-width: 640px) {
-  body .joydiv-controller1 .joydiv-trackpad .joydiv-tracker {
+  .joydiv-controller1 .joydiv-trackpad .joydiv-tracker {
     border-width: 0.27em;
     margin-left: -0.27em;
     margin-top: -0.27em;
   }
 }
-body .joydiv-controller2 {
+.joydiv-controller2 {
   position: absolute;
   width: 200px;
   height: 200px;
@@ -281,7 +327,7 @@ body .joydiv-controller2 {
   right: 1%;
 }
 @media only screen and (max-width: 640px) {
-  body .joydiv-controller2 {
+  .joydiv-controller2 {
     width: 100px;
     height: 100px;
     font-size: 55px;
@@ -289,19 +335,19 @@ body .joydiv-controller2 {
     right: 4%;
   }
 }
-body .joydiv-controller2 .joydiv-up,
-body .joydiv-controller2 .joydiv-left,
-body .joydiv-controller2 .joydiv-right,
-body .joydiv-controller2 .joydiv-down,
-body .joydiv-controller2 .joydiv-n,
-body .joydiv-controller2 .joydiv-m {
+.joydiv-controller2 .joydiv-up,
+.joydiv-controller2 .joydiv-left,
+.joydiv-controller2 .joydiv-right,
+.joydiv-controller2 .joydiv-down,
+.joydiv-controller2 .joydiv-n,
+.joydiv-controller2 .joydiv-m {
   position: absolute;
   width: 0;
   height: 0;
   background: transparent;
   border: solid transparent;
 }
-body .joydiv-controller2 .joydiv-up {
+.joydiv-controller2 .joydiv-up {
   top: 0%;
   left: 68%;
   margin-left: -40%;
@@ -311,7 +357,7 @@ body .joydiv-controller2 .joydiv-up {
   border-right-width: 0.4em;
   border-bottom-width: 0.45em;
 }
-body .joydiv-controller2 .joydiv-left {
+.joydiv-controller2 .joydiv-left {
   left: 0%;
   top: 53%;
   border-right-color: #f3b802;
@@ -321,7 +367,7 @@ body .joydiv-controller2 .joydiv-left {
   border-bottom-width: 0.4em;
   margin-top: -25%;
 }
-body .joydiv-controller2 .joydiv-right {
+.joydiv-controller2 .joydiv-right {
   right: 0%;
   top: 68%;
   margin-top: -40%;
@@ -331,7 +377,7 @@ body .joydiv-controller2 .joydiv-right {
   border-right-width: 0;
   border-bottom-width: 0.4em;
 }
-body .joydiv-controller2 .joydiv-down {
+.joydiv-controller2 .joydiv-down {
   bottom: 0%;
   left: 68%;
   margin-left: -40%;
@@ -341,7 +387,7 @@ body .joydiv-controller2 .joydiv-down {
   border-right-width: 0.4em;
   border-bottom-width: 0;
 }
-body .joydiv-controller2 .joydiv-trackpad {
+.joydiv-controller2 .joydiv-trackpad {
   position: absolute;
   left: 25%;
   right: 25%;
@@ -354,7 +400,7 @@ body .joydiv-controller2 .joydiv-trackpad {
   border-style: solid;
   border-color: #01be46;
 }
-body .joydiv-controller2 .joydiv-trackpad .joydiv-tracker {
+.joydiv-controller2 .joydiv-trackpad .joydiv-tracker {
   position: absolute;
   top: 51.5%;
   left: 51%;
@@ -367,7 +413,7 @@ body .joydiv-controller2 .joydiv-trackpad .joydiv-tracker {
   border-color: #0067c3;
 }
 @media only screen and (max-width: 640px) {
-  body .joydiv-controller2 .joydiv-trackpad .joydiv-tracker {
+  .joydiv-controller2 .joydiv-trackpad .joydiv-tracker {
     border-width: 0.27em;
     margin-left: -0.27em;
     margin-top: -0.27em;

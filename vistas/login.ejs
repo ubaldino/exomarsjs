@@ -1,0 +1,12 @@
+
+<div id="login">
+	<h1>Ingresar como explorador<h1>
+	<% if (!user) { %>
+		<!--<a href="/auth/facebook"><img src="login-with-facebook.png" width="154" height="22"></a>-->
+		<a href="/auth/facebook">mediante facebook</a>
+	<% } else { %>
+		<h2><%= user.displayName %>.</h2>
+		<h2><%= user.photos[0].value %>.</h2>
+	<% } %>
+
+</div>

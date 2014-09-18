@@ -81,7 +81,6 @@ element1.addEventListener( 'joydiv-changed' , function( e ) {
 			})
 			break;
     }
-    document.getElementById( 'direction1' ).value = valor_exomars;
 });
 
 element2.addEventListener( 'joydiv-changed' , function( e ) {
@@ -121,6 +120,5 @@ element2.addEventListener( 'joydiv-changed' , function( e ) {
     	case "none":
     		valor_camara = "camara: Sin movimiento"; break;
     }
-    document.getElementById( 'direction2' ).value = valor_camara;
-
+   
 });
