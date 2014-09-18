@@ -96,6 +96,26 @@ a {
   padding: 8px 8px;
   margin: 0;
 }
+#inputVideo {
+  top: 0;
+  position: absolute;
+  left: 35%;
+}
+#log_camara {
+  position: absolute;
+  top: 0%;
+  padding: 10px;
+  left: 0%;
+  width: 130px;
+  background: #fff;
+}
+#muestreo {
+  position: absolute;
+  bottom: 5px;
+  left: 42%;
+  padding: 12px;
+  background: #fff;
+}
 body #panel_modo {
   position: absolute;
   top: 20%;
@@ -184,6 +204,7 @@ body .joydiv-controller1 .joydiv-up {
   top: 0%;
   left: 68%;
   margin-left: -40%;
+  border-bottom-color: #f12f02;
   border-top-width: 0;
   border-left-width: 0.4em;
   border-right-width: 0.4em;
@@ -192,6 +213,7 @@ body .joydiv-controller1 .joydiv-up {
 body .joydiv-controller1 .joydiv-left {
   left: 0%;
   top: 53%;
+  border-right-color: #f3b802;
   border-top-width: 0.4em;
   border-left-width: 0;
   border-right-width: 0.45em;
@@ -202,6 +224,7 @@ body .joydiv-controller1 .joydiv-right {
   right: 0%;
   top: 68%;
   margin-top: -40%;
+  border-left-color: #f3b802;
   border-top-width: 0.4em;
   border-left-width: 0.45em;
   border-right-width: 0;
@@ -211,6 +234,7 @@ body .joydiv-controller1 .joydiv-down {
   bottom: 0%;
   left: 68%;
   margin-left: -40%;
+  border-top-color: #f12f02;
   border-top-width: 0.45em;
   border-left-width: 0.4em;
   border-right-width: 0.4em;
@@ -281,6 +305,7 @@ body .joydiv-controller2 .joydiv-up {
   top: 0%;
   left: 68%;
   margin-left: -40%;
+  border-bottom-color: #f12f02;
   border-top-width: 0;
   border-left-width: 0.4em;
   border-right-width: 0.4em;
@@ -289,6 +314,7 @@ body .joydiv-controller2 .joydiv-up {
 body .joydiv-controller2 .joydiv-left {
   left: 0%;
   top: 53%;
+  border-right-color: #f3b802;
   border-top-width: 0.4em;
   border-left-width: 0;
   border-right-width: 0.45em;
@@ -299,6 +325,7 @@ body .joydiv-controller2 .joydiv-right {
   right: 0%;
   top: 68%;
   margin-top: -40%;
+  border-left-color: #f3b802;
   border-top-width: 0.4em;
   border-left-width: 0.45em;
   border-right-width: 0;
@@ -308,6 +335,7 @@ body .joydiv-controller2 .joydiv-down {
   bottom: 0%;
   left: 68%;
   margin-left: -40%;
+  border-top-color: #f12f02;
   border-top-width: 0.45em;
   border-left-width: 0.4em;
   border-right-width: 0.4em;

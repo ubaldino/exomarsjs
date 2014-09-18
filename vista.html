@@ -17,30 +17,36 @@
     <link rel="stylesheet" type="text/css" href="/static/css/style.css">
 	<script src="/static/js/jquery-2.0.3.min.js"></script>
 		<script charset="UTF-8" src="/static/js/joydiv.js"></script>
-	<!--<script src="/static/js/libs/jquery-1.10.2.js"></script>-->
+
 	<script src="/static/js/libs/handlebars-1.1.2.js"></script>
 	<script src="/static/js/libs/ember-1.6.1.js"></script>
 	<script src="/static/js/app_ember.js"></script>
 
 	<script src="/static/js/headtrackr.min.js"></script>
-
+	
+	<script src="/socket.io/socket.io.js"></script>
+	<script charset="UTF-8" src="/static/js/control.js"></script>
+	
+    
 </head>
 <body>
-	<div id="contenedor">
+		<script type="text/x-handlebars" data-template-name="index">
 			<!--
-			<img id="video_c" class="video_c" src="http://192.168.1.192:8080/video" ></img>
+			<video id="video_c" class="video_c" src="/taylor.mp4" controls loop></video>
 			-->
 
-		<script type="text/x-handlebars" data-template-name="index">
-			<video id="video_c" class="video_c" src="/taylor.mp4" controls loop></video>
+			<img id="video_c" class="video_c" src="http://192.168.1.193:8080/video" ></img>
+
 			<div id="panel_superior"></div>
 				
-			<!--<input type="text" id="direction1" readonly>
-			<input type="text" id="direction2" readonly>-->
+			<!--
+			<input type="text" id="direction1" readonly>
+			<input type="text" id="direction2" readonly>
+			-->
 	
 			<div id="panel_modo">
 				<ul>
-					<li name="control" class="btn" ><a  href="/#/">Control</a></li>
+					<li name="control" class="btn" ><a  href="/">Control</a></li>
 					<li name="vision_artificial" class="btn"><a  href="/#/vision_artificial">Vision Artificial</a></li>
 				</ul>
 			</div>
@@ -68,54 +74,107 @@
 			        <div class="joydiv-tracker"></div>
 			    </div>
 			</div>
+			<div id="muestreo">sensores</div>
 
-		
 			<script charset="UTF-8" src="/static/js/eventos_mando.js"></script>
 		</script>
 
+		<!--#####################################333333-->
 		
 		<script type="text/x-handlebars" data-template-name="vision_artificial">
-			
+			<img id="video_c" class="video_c" src="http://192.168.1.193:8080/video" ></img>
 			<h1>Vision artifial</h1>
+			<canvas id="inputCanvas" width="320" height="240" style="display:none"></canvas>
+			<video id="inputVideo" autoplay loop></video>
+			<div id="log_camara">estado gestos</div>
+			
 			<div id="panel_modo">
 				<ul>
-					<li name="control" class="btn" ><a  href="/#/">Control</a></li>
+					<li name="control" class="btn" ><a  href="/">Control</a></li>
 					<li name="vision_artificial" class="btn"><a  href="/#/vision_artificial">Vision Artificial</a></li>
 				</ul>
 			</div>
 
+			<div id="muestreo">sensores</div>
 
-			<canvas id="inputCanvas" width="320" height="240" style="display:none"></canvas>
-			<video id="inputVideo" autoplay loop></video>
-			
-			<div id="log_camara"></div>
-			
+
 			<script type="text/javascript">
-
+				var estado_x = "nn" ;
+				var estado_y = "nn" ;
 				document.addEventListener('headtrackrStatus', 
-				  function (event) {
-				    if (event.status == "getUserMedia") {
-					    console.log( event.status );
-				      //alert("getUserMedia is supported!");
-				    }	
-				  }
+					function (event) {
+				    	if (event.status == "getUserMedia") {
+					    	console.log( event.status );
+				      		//alert("no soporta getUserMedia!");
+				    	}	
+				  	}
 				);
 
 
 				document.addEventListener( 'headtrackingEvent' , function(event) {
+					var track_cam_x = "nn";
+					var track_cam_y = "nn";
+
+
+					/*
 					console.log( "-----------------------" );
 					console.log( "X : "+ Math.round( event.x ) );
 					console.log( "Y : "+ Math.round( event.y ) );
 					console.log( "Z : "+ Math.round( event.z ) );
 					console.log( "-----------------------" );
+					*/
 					var html = "X : "+ Math.round( event.x )+"\n";
 					    html += "Y : "+ Math.round( event.y )+"\n";
 					    html += "Z : "+ Math.round( event.z )+"\n";
-					document.getElementById("log_camara").innerHTML = html
+					    // izquierda = T;
+					    // derecha = U
+					    // ARRIBA = J
+						// ABAJO  = K
+					track_cam_x = ( Math.round( event.x ) < 0  ) ? "T" : "U" ;
+					
+					if( Math.round( event.y ) >= 11  && Math.round( event.y ) <= 14 )
+						document.getElementById("log_camara").innerHTML = "detenido";
+					else
+						track_cam_y = ( Math.round( event.y ) > 14  ) ? "J" : "K" ;
+
+
+					console.log(  Math.round( event.y ) );
+					
+					if ( estado_x != track_cam_x ) {
+						estado_x = track_cam_x;
+
+						switch( track_cam_x ){
+							case 'T':
+								document.getElementById("log_camara").innerHTML = "izquierda";
+								break;
+							case 'U':
+								document.getElementById("log_camara").innerHTML = "derecha";
+								break;
+						}
+						
+						io.emit('encender', { comando: track_cam_x , velocidad: '0'  }, function( data ) {
+						    console.log( "data.success ::  trackcam "+ track_cam_x );
+						});
+					}
+
+					if ( estado_y != track_cam_y ) {
+						estado_y = track_cam_y;
+
+						switch( track_cam_y ){
+							case 'J':
+								document.getElementById("log_camara").innerHTML = "arriba";
+								break;
+							case 'K':
+								document.getElementById("log_camara").innerHTML = "abajo";
+								break;
+						}
+						
+						io.emit('encender', { comando: track_cam_y , velocidad: '0'  }, function( data ) {
+						    console.log( "data.success ::  trackcam "+ track_cam_y );
+						});
+					}
 
 				}, false )
-
-
 
 				var videoInput = document.getElementById( 'inputVideo' );
 				var canvasInput = document.getElementById( 'inputCanvas' );
@@ -124,26 +183,37 @@
 				htracker.init( videoInput, canvasInput );
 				htracker.start();
 			</script>
-
-
 		</script>
 
 
+		<script type="text/x-handlebars" data-template-name="tripulante">
+			<script>
+			  window.fbAsyncInit = function() {
+			    FB.init({
+			      appId      : '292025954335781',
+			      xfbml      : true,
+			      version    : 'v2.1'
+			    });
+			  };
 
+			  (function(d, s, id){
+			     var js, fjs = d.getElementsByTagName(s)[0];
+			     if (d.getElementById(id)) {return;}
+			     js = d.createElement(s); js.id = id;
+			     js.src = "//connect.facebook.net/en_US/sdk.js";
+			     fjs.parentNode.insertBefore(js, fjs);
+			   }(document, 'script', 'facebook-jssdk'));
+			</script>
+			<h1> La pagina del tripulante! </h1>
+			<div
+			  class="fb-like"
+			  data-share="true"
+			  data-width="450"
+			  data-show-faces="true">
+			</div>
 
-		<script type="text/x-handlebars" data-template-name="contacto">
-			<h1> La pagina de contacto! </h1>
 		</script>
-
-
-	</div>
-	<script src="/socket.io/socket.io.js"></script>
-	<script charset="UTF-8" src="/static/js/control.js"></script>
-	
-    <script type="text/javascript">
-    io = io.connect()
-    </script>	
-	
+				
 
 </body>
 </html>

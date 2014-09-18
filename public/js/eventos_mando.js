@@ -88,20 +88,28 @@ element2.addEventListener( 'joydiv-changed' , function( e ) {
     switch( joydiv2.getOneOf8Directions().name ){
     	case "up":
     		valor_camara = "camara: arriba"; 
-    		io.emit('encender', { comando: 'camara up' }, function(data) {
+    		io.emit('encender', { comando: 'J', velocidad: '0' }, function(data) {
 			    console.log( data.success )
-			})
+			});
     		break;
     	case "down":
     		valor_camara = "camara: abajo"; 
-			io.emit('apagar', { hey: 'server' } , function(data) {
+    		io.emit('encender', { comando: 'K', velocidad: '0' }, function(data) {
 			    console.log( data.success )
-			})
+			});
     		break;
     	case "left":
-    		valor_camara = "camara: izquierda"; break;
+    		valor_camara = "camara: izquierda";
+    		io.emit('encender', { comando: 'T', velocidad: '0' }, function(data) {
+			    console.log( data.success )
+			});
+    		break;
 		case "right":
-    		valor_camara = "camara: derecha"; break;
+    		valor_camara = "camara: derecha";
+    		io.emit('encender', { comando: 'U', velocidad: '0' }, function(data) {
+			    console.log( data.success )
+			});
+    		break;
     	case "up-left":
     		valor_camara = "camara: arriba-izquierda"; break;
     	case "up-right":

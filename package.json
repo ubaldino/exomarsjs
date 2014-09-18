@@ -23,6 +23,22 @@
     "socket.io-redis": "*",
     "marked": "*",
     "forever": "*",
+    "connect": "*",
+    "mongoose": "*",
+    "stylus": "*",
+    "connect-mongodb": "*",
+    "markdown": "*",
+    "mailer": "*",
+    "passport": "*",
+    "passport-stormpath": "*",
+    "express-session": "*",
+    "connect-flash": "*", 
+    "stormpath": "*",
+    "passport-facebook":"*",
+    "morgan":"*",
+    "body-parser":"*",
+    "cookie-parser":"*",
+    "method-override":"*",
     "colors": "*"
   }
 }

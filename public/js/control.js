@@ -126,7 +126,21 @@
 $(function() {
 
 	io.on( 'mensaje', function( msg ) {
-		$("#pn_mensajes").html( msg.mensaje + "<br/>" )
+		if ( msg.charAt( 0 ) == 'X' ) {
+			var datos = msg.split(":");
+			var temperatura = datos[ 1 ];
+			var humedad = datos[ 2 ];
+			var distancia = datos[ 3 ];
+
+			var dhtml = '<p>Temperatura : '+temperatura  '</p><br/>';
+			dhtml += '<p>Humedad : ' + hunedad  '</p><br/>';
+			dhtml += '<p>Distancia : ' + distancia  '</p><br/>';
+			$('#muestreo').html( dhtml );
+			
+		}else{
+			$("#pn_mensajes").html( msg.mensaje + "<br/>" )
+			
+		}
 	});
 
 	$('.encender').on( 'click', function() {

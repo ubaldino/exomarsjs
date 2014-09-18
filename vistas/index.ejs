@@ -1,0 +1,12 @@
+extends ./layout.ejs
+
+block scripts
+  script(src='/jquery.js')
+  script(src='/pets.js')
+
+block body
+	<% if (!user) { %>
+		<h2>Ingrese</h2>
+	<% } else { %>
+		<h2><%= user.username %>.</h2>
+	<% } %>
